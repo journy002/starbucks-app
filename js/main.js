@@ -30,6 +30,8 @@ const badgeEl = document.querySelector('header .badges');
 // lodash에서 제공하는 throttle() 기능을 이용하여 300(0.3초)부하를 시켜 부하를 막는다
 // throttle()은 scroll 사용시 매우 빈번하게 사용됨.
 // _.throttle(함수,시간)
+const toTopEl = document.querySelector('#to-top');
+
 window.addEventListener('scroll', _.throttle(function(){
     if(window.scrollY > 500) {
         // 배지 숨기기
@@ -38,14 +40,28 @@ window.addEventListener('scroll', _.throttle(function(){
             display: 'none',
             opacity: 0
         });
+        // 버튼 보이기
+        gsap.to(toTopEl, .2, {
+            x: 0
+        });
     } else {
         // 배지 보이기
         gsap.to(badgeEl, .6, {
             display: 'block',
             opacity: 1
-        })
+        });
+        // 버튼 숨기기
+        gsap.to(toTopEl, .2, {
+            x: 100 
+        });
     }
 },300));
+
+toTopEl.addEventListener('click', function() {
+    gsap.to(window, .7, {
+        scrollTo: 0
+    });
+});
 
 
 // visual image,text 순차적으로 나타나게 만들기
@@ -80,6 +96,17 @@ new Swiper('.promotion .swiper-container', {
     navigation: {
         prevEl: '.promotion .swiper-prev',
         nextEl: '.promotion .swiper-next'
+    }
+});
+
+new Swiper('.awards .swiper-container', {
+    autoplay: true,
+    loop: true,
+    spaceBetween: 30,
+    slidesPerView: 5,
+    navigation: {
+        prevEl: '.awards .swiper-prev',
+        nextEl: '.awards .swiper-next'
     }
 });
 
@@ -123,14 +150,21 @@ floatingObject('.floating1', 1, 15); // css 선택자 선택
 floatingObject('.floating2', .5, 15);
 floatingObject('.floating3', 1.5, 20);
 
-
-const spyEls = document.querySelectorAll('.section.scroll-spy');
+const spyEls = document.querySelectorAll('section.scroll-spy');
 spyEls.forEach(function(spyEl) {
     new ScrollMagic
         .Scene({
             triggerElement: spyEl,
             triggerHook: .8, // javascript가 뷰포트 0.8부분에서 setClassToggle을 실행 시켜주기위해 hook을 걸어준다
         })
-        .setClassToggle()
-        .addTo();
+        .setClassToggle(spyEl, 'show')
+        .addTo(new ScrollMagic.Controller()); // 추가한 옵션을 내부 컨트롤러에 할당하여 동작할 수 있도록 하는 작업
 });
+
+
+const thisYear = document.querySelector('.this-year');
+thisYear.textContent = new Date().getFullYear(); // 현재 연도가 반환된다.
+
+
+
+
