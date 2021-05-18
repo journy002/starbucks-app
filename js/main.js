@@ -78,7 +78,22 @@ new Swiper('.promotion .swiper-container', {
         clickable: true, // 사용자의 페이지 번호 요소 제어 가능 여부
     },
     navigation: {
-        preEl: '.promotion .swiper-prev',
+        prevEl: '.promotion .swiper-prev',
         nextEl: '.promotion .swiper-next'
+    }
+});
+
+const promotionEl = document.querySelector('.promotion');
+const promotionToggleBtn = document.querySelector('.toggle-promotion');
+let isHidePromotion = false // 처음엔 화면에 잘보이기 때문에 false로 지정
+
+promotionToggleBtn.addEventListener('click', function() {
+    isHidePromotion = !isHidePromotion // !isHidePromotion: true
+    if(isHidePromotion) {
+        //숨김 처리
+        promotionEl.classList.add('hide');
+    } else {
+        // 보임 처리
+        promotionEl.classList.remove('hide');
     }
 });
