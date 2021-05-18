@@ -407,7 +407,7 @@ body {
     height: 693px;
     background-color: #f6f5ef;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; /* hide 기능으로 높이가 줄어들때 안에 내용이 바깥으로 넘치지 않게 적용 */
     transition: height .4s;
   }
   .notice .promotion.hide {
