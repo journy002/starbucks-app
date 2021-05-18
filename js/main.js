@@ -122,3 +122,15 @@ function floatingObject(selector, delay, size) {
 floatingObject('.floating1', 1, 15); // css 선택자 선택
 floatingObject('.floating2', .5, 15);
 floatingObject('.floating3', 1.5, 20);
+
+
+const spyEls = document.querySelectorAll('.section.scroll-spy');
+spyEls.forEach(function(spyEl) {
+    new ScrollMagic
+        .Scene({
+            triggerElement: spyEl,
+            triggerHook: .8, // javascript가 뷰포트 0.8부분에서 setClassToggle을 실행 시켜주기위해 hook을 걸어준다
+        })
+        .setClassToggle()
+        .addTo();
+});
