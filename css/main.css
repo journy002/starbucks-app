@@ -682,9 +682,10 @@ body {
     align-items: center;
   }
   .reserve-store .medal {
+    /* front,back이 회전할때 원근법을 적용시켜줘야 자연스럽다. 너비,높이값을 지정해주고 원근법 기능을 넣어 자연스럽게 만들어준다. */
     width: 334px;
     height: 334px;
-    perspective: 600px;
+    perspective: 600px; /* 원근법 */
   }
   .reserve-store .medal .front,
   .reserve-store .medal .back {
